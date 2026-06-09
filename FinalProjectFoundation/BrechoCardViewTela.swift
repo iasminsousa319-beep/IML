@@ -5,37 +5,44 @@
 //  Created by Found on 09/06/26.
 //
 import SwiftUI
+
 struct BrechoCardViewTela: View {
     let brecho: Brecho
-      var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
-        TelaPrincipalImageView(
-            imagem: brecho.imagem
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            TelaPrincipalImageView(imagem: brecho.imagem)
+                .frame(width: 160, height: 160)
+            
+            Text(brecho.nome)
+                .font(.headline)
+            
+            Text(brecho.endereco)
+                .font(.subheadline)
+            
+            Text(brecho.descricao)
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+        }
+        .padding()
+        .frame(width: 190)
+        .overlay(
+            RoundedRectangle(cornerRadius: 13.0)
+                .stroke(.gray, lineWidth: 1)
         )
-            .frame(width: 160, height: 160)
-               Text(brecho.nome)
-            .font(.headline)
-                Text(brecho.endereco)
-            .font(.subheadline)
-        Text(brecho.descricao)
-            .font(.footnote)
-            .foregroundStyle(.secondary)
-                    }
-                    .padding()
-                    .frame(width: 190)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 13.0)
-                            .stroke(.gray, lineWidth: 1)
-                    )
-                }
-            }
+    }
+}
 
 #Preview {
+    // 1. Criamos dados de imagem de teste para passar ao modelo
+    // (Se você tiver um asset chamado "benchó", use UIImage(resource: .benchó).pngData())
+    let fotoDeTeste = UIImage(resource: .benchó).pngData();
+    
     let exemplo = Brecho(
-        nome: "Brechó",
+        nome: "Brechó da Vila",
         endereco: "Benfica",
-        descricao: "Roupas seminovas",
-        imagem: nil
+        descricao: "Roupas seminovas e vintage",
+        imagem: fotoDeTeste
     )
 
     BrechoCardViewTela(brecho: exemplo)
