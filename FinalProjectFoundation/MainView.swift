@@ -9,16 +9,17 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            Tab("Brechós", systemImage: "house") {
+                // Adicione a tela para listage dos álbuns
+            }
+            Tab("Proximos a mim", systemImage: "list.star") {
+                // Exiba as músicas favoritas do usuário
+              
+            }
         }
-        .padding()
     }
 }
-
 #Preview {
     MainView()
 }
