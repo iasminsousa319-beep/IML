@@ -34,12 +34,11 @@ struct BrechoCardViewTela: View {
 }
 
 #Preview {
-    // 1. Criamos dados de imagem de teste para passar ao modelo
-    // (Se você tiver um asset chamado "benchó", use UIImage(resource: .benchó).pngData())
+    
     let fotoDeTeste = UIImage(resource: .benchó).pngData();
     
     let exemplo = Brecho(
-        nome: "Brechó da Vila",
+        nome: "Benchó",
         endereco: "Benfica",
         descricao: "Roupas seminovas e vintage",
         imagem: fotoDeTeste
