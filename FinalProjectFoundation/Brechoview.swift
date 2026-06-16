@@ -5,7 +5,8 @@
 //  Created by Found on 09/06/26.
 //
 import SwiftUI
-
+import SwiftData
+import SwiftDataSQLite
 struct Brechoview: View {
 
     let exemplo = Brecho(
@@ -28,12 +29,7 @@ struct Brechoview: View {
                 LazyVGrid(columns: colunas, spacing: 20) {
 
                     BrechoCardViewTela(brecho: exemplo)
-                    BrechoCardViewTela(brecho: exemplo)
-                    BrechoCardViewTela(brecho: exemplo)
-                    BrechoCardViewTela(brecho: exemplo)
-                    BrechoCardViewTela(brecho: exemplo)
-                    BrechoCardViewTela(brecho: exemplo)
-
+                  
                 }
                 .padding()
             }

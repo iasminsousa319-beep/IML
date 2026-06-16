@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22EFB3492FE17210005A4BC4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22EFB3482FE17210005A4BC4 /* File.swift */; };
 		54D73C2C2FC8720F00F8864B /* SwiftDataSQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 54D73C2B2FC8720F00F8864B /* SwiftDataSQLite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22EFB3482FE17210005A4BC4 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		54D73C102FC868FE00F8864B /* FinalProjectFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalProjectFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -37,6 +39,7 @@
 		54D73C072FC868FE00F8864B = {
 			isa = PBXGroup;
 			children = (
+				22EFB3482FE17210005A4BC4 /* File.swift */,
 				54D73C122FC868FE00F8864B /* FinalProjectFoundation */,
 				54D73C112FC868FE00F8864B /* Products */,
 			);
@@ -128,6 +131,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22EFB3492FE17210005A4BC4 /* File.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
