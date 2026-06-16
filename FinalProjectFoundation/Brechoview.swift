@@ -8,6 +8,8 @@ import SwiftUI
 import SwiftData
 import SwiftDataSQLite
 struct Brechoview: View {
+    
+    @Query var brechos: [Brecho]
 
     let exemplo = Brecho(
         nome: "Brechó da Vila",
@@ -27,8 +29,15 @@ struct Brechoview: View {
             ScrollView {
 
                 LazyVGrid(columns: colunas, spacing: 20) {
-
-                    BrechoCardViewTela(brecho: exemplo)
+                    ForEach(brechos) { brecho in
+                        BrechoCardViewTela(brecho: brecho)
+                    }
+//                    BrechoCardViewTela(brecho: exemplo)
+//                    BrechoCardViewTela(brecho: exemplo)
+//                    BrechoCardViewTela(brecho: exemplo)
+//                    BrechoCardViewTela(brecho: exemplo)
+//                    BrechoCardViewTela(brecho: exemplo)
+//                    BrechoCardViewTela(brecho: exemplo)
                   
                 }
                 .padding()
@@ -40,4 +49,9 @@ struct Brechoview: View {
 
 #Preview {
     Brechoview()
+        .modelContainer(
+            for: [Brecho.self],
+            inMemory: true,
+            sqliteDatabasePath: Bundle.main.path(forResource: "db", ofType: "sqlite")!
+        )
 }

@@ -5,6 +5,8 @@
 //  Created by Found on 09/06/26.
 //
 import SwiftUI
+import SwiftData
+import SwiftDataSQLite
 
 struct BrechoCardViewTela: View {
     let brecho: Brecho
