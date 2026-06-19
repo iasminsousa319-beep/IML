@@ -27,7 +27,7 @@ struct BrechoCardViewTela: View {
                 .foregroundStyle(.secondary)
         }
         .padding()
-        .frame(width: 190)
+        .frame(width: 180)
         .overlay(
             RoundedRectangle(cornerRadius: 13.0)
                 .stroke(.gray, lineWidth: 1)

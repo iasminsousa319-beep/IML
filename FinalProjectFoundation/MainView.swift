@@ -5,6 +5,8 @@
 //  Created by Beatriz Leonel on 28/05/26.
 //
 import SwiftUI
+import SwiftData
+import SwiftDataSQLite
 
 struct MainView: View {
 
@@ -55,4 +57,9 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .modelContainer(
+            for: [Brecho.self],
+            inMemory: true,
+            sqliteDatabasePath: Bundle.main.path(forResource: "db", ofType: "sqlite")!
+        )
 }

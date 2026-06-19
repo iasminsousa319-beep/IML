@@ -15,6 +15,10 @@ struct BrechoMapa: Identifiable {
 
 struct PesquisaView: View {
 
+    @Environment(\.dismiss) private var dismiss
+
+    @State private var textoPesquisa = ""
+
     let brechos = [
         BrechoMapa(
             nome: "Brechó Exemplo",
@@ -40,15 +44,33 @@ struct PesquisaView: View {
         )
 
     var body: some View {
-        Map(position: $cameraPosition) {
-            ForEach(brechos) { brecho in
-                Marker(
-                    brecho.nome,
-                    coordinate: brecho.coordinate
-                )
+        NavigationStack {
+
+            Map(position: $cameraPosition) {
+                ForEach(brechos) { brecho in
+                    Marker(
+                        brecho.nome,
+                        coordinate: brecho.coordinate
+                    )
+                }
+            }
+            .searchable(
+                text: $textoPesquisa,
+                prompt: "Pesquisar brechó"
+            )
+
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                        }
+                    }
+                }
             }
         }
-        .navigationTitle("Brechós de Fortaleza")
     }
 }
 
@@ -59,9 +81,7 @@ struct BrechoS: Identifiable {
     let descricao: String
     let coordinate: CLLocationCoordinate2D
 }
- 
+
 #Preview {
-    NavigationStack {
-        PesquisaView()
-    }
+    PesquisaView()
 }

@@ -28,7 +28,7 @@ struct Brechoview: View {
 
             ScrollView {
 
-                LazyVGrid(columns: colunas, spacing: 20) {
+                LazyVGrid(columns: colunas, spacing: 30) {
                     ForEach(brechos) { brecho in
                         BrechoCardViewTela(brecho: brecho)
                     }
@@ -40,7 +40,7 @@ struct Brechoview: View {
 //                    BrechoCardViewTela(brecho: exemplo)
                   
                 }
-                .padding()
+                .padding(8)
             }
             .navigationTitle("Brechós")
         }

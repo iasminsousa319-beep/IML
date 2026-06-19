@@ -30,7 +30,7 @@ struct ProximosView: View {
 
             ScrollView {
 
-                LazyVStack(spacing: 20) {
+                LazyVStack(spacing: 15) {
 
                     ForEach(brechos) { brecho in
 
@@ -61,11 +61,17 @@ struct ProximosView: View {
                         .clipShape(
                             RoundedRectangle(cornerRadius: 15)
                         )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 15)
+                                .stroke(.black.opacity(0.3), lineWidth: 1)
+
+                        )
                     }
                 }
                 .padding()
             }
-            .navigationTitle("Brechós")
+            .navigationTitle("Próximos a mim")
+                   .navigationBarTitleDisplayMode(.large)
         }
     }
 }
