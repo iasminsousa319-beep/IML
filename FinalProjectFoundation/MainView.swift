@@ -13,20 +13,24 @@ struct MainView: View {
     @State private var mostrarPesquisa = false
 
     var body: some View {
-
+    
         ZStack {
-
             TabView {
-
+                
                 Tab("Brechós", systemImage: "house") {
-                    Brechoview()
+                    NavigationStack {
+                        Brechoview()
+                    }
                 }
 
                 Tab("Próximos a mim", systemImage: "list.star") {
-                    ProximosView()
+                    NavigationStack {
+                        ProximosView()
+                    }
                 }
             }
-
+            
+           
             VStack {
                 Spacer()
 
@@ -44,8 +48,9 @@ struct MainView: View {
                             .clipShape(Circle())
                             .shadow(radius: 5)
                     }
-                    .padding(.trailing, 20)
-                    .padding(.bottom, 8)
+                    .padding(.trailing, 16)
+                    // Subimos para 16 para alinhar perfeitamente ao lado da nova TabBar flutuante
+                    .padding(.bottom, 0.1)
                 }
             }
         }

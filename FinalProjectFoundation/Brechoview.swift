@@ -7,6 +7,7 @@
 import SwiftUI
 import SwiftData
 import SwiftDataSQLite
+
 struct Brechoview: View {
     
     @Query var brechos: [Brecho]
@@ -15,7 +16,7 @@ struct Brechoview: View {
         nome: "Brechó da Vila",
         endereco: "Benfica",
         descricao: "Roupas seminovas e vintage",
-        imagem: UIImage(resource: .benchó).pngData()
+        imagem: nil
     )
 
     let colunas = [
@@ -25,20 +26,14 @@ struct Brechoview: View {
 
     var body: some View {
         NavigationStack {
-
             ScrollView {
-
                 LazyVGrid(columns: colunas, spacing: 30) {
                     ForEach(brechos) { brecho in
-                        BrechoCardViewTela(brecho: brecho)
+                        NavigationLink(destination: PerfilBrecho(brecho: brecho)) {
+                            BrechoCardViewTela(brecho: brecho)
+                        }
+                        .buttonStyle(.plain)
                     }
-//                    BrechoCardViewTela(brecho: exemplo)
-//                    BrechoCardViewTela(brecho: exemplo)
-//                    BrechoCardViewTela(brecho: exemplo)
-//                    BrechoCardViewTela(brecho: exemplo)
-//                    BrechoCardViewTela(brecho: exemplo)
-//                    BrechoCardViewTela(brecho: exemplo)
-                  
                 }
                 .padding(8)
             }

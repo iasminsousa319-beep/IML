@@ -25,7 +25,6 @@ struct PerfilBrecho: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     
-                   
                     ZStack(alignment: .topLeading) {
                         if let imgData = brecho.imagem, let uiImage = UIImage(data: imgData) {
                             Image(uiImage: uiImage)
@@ -54,10 +53,8 @@ struct PerfilBrecho: View {
                         .padding(.leading, 16)
                     }
                     
-                   
                     VStack(alignment: .leading, spacing: 18) {
                         
-                      
                         VStack(alignment: .leading, spacing: 4) {
                             Text(brecho.nome)
                                 .font(.title)
@@ -75,7 +72,7 @@ struct PerfilBrecho: View {
                             }
                         }
                         
-                  VStack(alignment: .leading, spacing: 6) {
+                        VStack(alignment: .leading, spacing: 6) {
                             Text(brecho.descricao)
                                 .font(.body)
                             
@@ -84,7 +81,6 @@ struct PerfilBrecho: View {
                                 .foregroundStyle(.gray)
                         }
                         
-                      
                         VStack(alignment: .leading, spacing: 4) {
                             Text("Horário de funcionamento:")
                                 .font(.headline)
@@ -95,7 +91,6 @@ struct PerfilBrecho: View {
                         .font(.subheadline)
                         .foregroundStyle(.gray)
                         
-
                         VStack(alignment: .leading, spacing: 8) {
                             Text("Localização")
                                 .font(.title3)
@@ -121,7 +116,7 @@ struct PerfilBrecho: View {
             Divider()
             HStack(spacing: 0) {
                 Button(action: {
-                    // Ação do Instagram futuramente
+                   
                 }) {
                     HStack {
                         Image(systemName: "camera")
@@ -138,7 +133,7 @@ struct PerfilBrecho: View {
                     .frame(height: 24)
                 
                 Button(action: {
-                    // Ação do Whatsapp futuramente
+               
                 }) {
                     HStack {
                         Image(systemName: "message")
@@ -155,6 +150,7 @@ struct PerfilBrecho: View {
         }
         .navigationBarBackButtonHidden(true)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar(.hidden, for: .tabBar)
     }
 }
 
@@ -170,4 +166,3 @@ struct PerfilBrecho: View {
         PerfilBrecho(brecho: exemplo)
     }
 }
-

@@ -5,24 +5,12 @@
 //  Created by Found on 09/06/26.
 //
 import SwiftUI
+import SwiftData
+import SwiftDataSQLite
 
 struct ProximosView: View {
 
-    let brechos = [
-        Brecho(
-            nome: "Susclo brechó",
-            endereco: "Loja Física",
-            descricao: "ABERTO",
-            imagem: UIImage(resource: .susclo).pngData()
-        ),
-
-        Brecho(
-            nome: "Elegante Fortaleza Brechó",
-            endereco: "Loja Física",
-            descricao: "ABERTO",
-            imagem: UIImage(resource: .elegante).pngData()
-        )
-    ]
+    @Query var Proximos: [Brecho]
 
     var body: some View {
 
@@ -32,7 +20,7 @@ struct ProximosView: View {
 
                 LazyVStack(spacing: 15) {
 
-                    ForEach(brechos) { brecho in
+                    ForEach(Proximos) { brecho in
 
                         HStack(alignment: .top, spacing: 15) {
 
@@ -78,4 +66,9 @@ struct ProximosView: View {
 
 #Preview {
     ProximosView()
+        .modelContainer(
+            for: [Brecho.self],
+            inMemory: true,
+            sqliteDatabasePath: Bundle.main.path(forResource: "db", ofType: "sqlite")!
+        )
 }
