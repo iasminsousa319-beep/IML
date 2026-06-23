@@ -14,47 +14,74 @@ struct MainView: View {
 
     var body: some View {
     
-        ZStack {
-            TabView {
-                
-                Tab("Brechós", systemImage: "house") {
-                    NavigationStack {
+        TabView {
+            
+            Tab("Brechós", systemImage: "house") {
+                NavigationStack {
+                    ZStack {
                         Brechoview()
-                    }
-                }
+                        
+                        VStack {
+                            Spacer()
 
-                Tab("Próximos a mim", systemImage: "list.star") {
-                    NavigationStack {
-                        ProximosView()
+                            HStack {
+                                Spacer()
+
+                                Button {
+                                    mostrarPesquisa = true
+                                } label: {
+                                    Image(systemName: "magnifyingglass")
+                                        .font(.title2)
+                                        .foregroundStyle(.gray)
+                                        .frame(width: 60, height: 60)
+                                        .background(.white)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 5)
+                                }
+                                .padding(.trailing, 15)
+                                .padding(.bottom, 22)
+                            }
+                        }
+                    
+                        .ignoresSafeArea(.all, edges: .bottom)
                     }
                 }
             }
-            
-           
-            VStack {
-                Spacer()
 
-                HStack {
-                    Spacer()
+            Tab("Próximos a mim", systemImage: "list.star") {
+                NavigationStack {
+                    ZStack {
+                        ProximosView()
+                        
+                        VStack {
+                            Spacer()
 
-                    Button {
-                        mostrarPesquisa = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .font(.title2)
-                            .foregroundStyle(.gray)
-                            .frame(width: 60, height: 60)
-                            .background(.white)
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
+                            HStack {
+                                Spacer()
+
+                                Button {
+                                    mostrarPesquisa = true
+                                } label: {
+                                    Image(systemName: "magnifyingglass")
+                                        .font(.title2)
+                                        .foregroundStyle(.gray)
+                                        .frame(width: 60, height: 60)
+                                        .background(.white)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 5)
+                                }
+                                .padding(.trailing, 15)
+                                .padding(.bottom, 22)
+                            }
+                        }
+                       
+                        .ignoresSafeArea(.all, edges: .bottom)
                     }
-                    .padding(.trailing, 16)
-                    // Subimos para 16 para alinhar perfeitamente ao lado da nova TabBar flutuante
-                    .padding(.bottom, 0.1)
                 }
             }
         }
-        .sheet(isPresented: $mostrarPesquisa) {
+        
+        .fullScreenCover(isPresented: $mostrarPesquisa) {
             PesquisaView()
         }
     }

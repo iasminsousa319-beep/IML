@@ -7,79 +7,114 @@
 import SwiftUI
 import MapKit
 
-struct BrechoMapa: Identifiable {
-    let id = UUID()
-    let nome: String
-    let coordinate: CLLocationCoordinate2D
-}
-
 struct PesquisaView: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    @State private var textoPesquisa = ""
+    @State private var textoPesquisa = "brechó"
 
-    let brechos = [
-        BrechoMapa(
-            nome: "Brechó Exemplo",
-            coordinate: CLLocationCoordinate2D(
-                latitude: -3.7304,
-                longitude: -38.5299
-            )
-        )
-    ]
+    @State private var resultados: [MKMapItem] = []
 
-    @State private var cameraPosition: MapCameraPosition =
-        .region(
-            MKCoordinateRegion(
-                center: CLLocationCoordinate2D(
-                    latitude: -3.7304,
-                    longitude: -38.5299
-                ),
-                span: MKCoordinateSpan(
-                    latitudeDelta: 0.02,
-                    longitudeDelta: 0.02
-                )
-            )
-        )
+    @State private var cameraPosition: MapCameraPosition = .automatic
 
     var body: some View {
-        NavigationStack {
+
+        ZStack(alignment: .top) {
 
             Map(position: $cameraPosition) {
-                ForEach(brechos) { brecho in
+
+                ForEach(resultados, id: \.self) { item in
+
                     Marker(
-                        brecho.nome,
-                        coordinate: brecho.coordinate
+                        item.name ?? "Local",
+                        coordinate: item.placemark.coordinate
                     )
                 }
             }
-            .searchable(
-                text: $textoPesquisa,
-                prompt: "Pesquisar brechó"
-            )
+            .ignoresSafeArea()
 
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
+            HStack(spacing: 12) {
+
+                Button {
+                    dismiss()
+                } label: {
+
+                    Image(systemName: "chevron.left")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.primary)
+                        .frame(width: 44, height: 44)
+                        .background(.white)
+                        .clipShape(Circle())
+                        .shadow(radius: 4)
+                }
+
+                HStack {
+
+                    Image(systemName: "magnifyingglass")
+                        .foregroundStyle(.gray)
+
+                    TextField(
+                        "Pesquisar brechó",
+                        text: $textoPesquisa
+                    )
+                    .autocorrectionDisabled()
+                    .onSubmit {
+                        pesquisar()
+                    }
+
+                    if !textoPesquisa.isEmpty {
+
+                        Button {
+                            textoPesquisa = ""
+                        } label: {
+
+                            Image(systemName: "xmark.circle.fill")
+                                .foregroundStyle(.gray)
                         }
                     }
                 }
+                .padding(.horizontal, 12)
+                .frame(height: 44)
+                .background(.white)
+                .cornerRadius(12)
+                .shadow(radius: 4)
+            }
+            .padding(.horizontal)
+            .padding(.top, 8)
+        }
+        .onAppear {
+            pesquisar()
+        }
+    }
+
+    func pesquisar() {
+
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = textoPesquisa
+
+        let search = MKLocalSearch(request: request)
+
+        search.start { response, error in
+
+            guard let response = response else { return }
+
+            resultados = response.mapItems
+
+            if let primeiro = response.mapItems.first {
+
+                cameraPosition = .region(
+                    MKCoordinateRegion(
+                        center: primeiro.placemark.coordinate,
+                        span: MKCoordinateSpan(
+                            latitudeDelta: 0.05,
+                            longitudeDelta: 0.05
+                        )
+                    )
+                )
             }
         }
     }
-}
-
-struct BrechoS: Identifiable {
-    let id = UUID()
-    let nome: String
-    let endereco: String
-    let descricao: String
-    let coordinate: CLLocationCoordinate2D
 }
 
 #Preview {
